@@ -45,6 +45,7 @@
     // global
     "difficulty": "Difficulty",
     "masternodecount": "Master Nodes",
+    "guardiancount": "Guardian Nodes",
     "network": "Network",
     "masternodes": "Masternodes",
     "height": "Height",

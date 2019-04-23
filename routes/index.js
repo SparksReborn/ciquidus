@@ -399,25 +399,37 @@ router.get('/ext/summary', function(req, res) {
         lib.get_blockcount(function(blockcount) {
           lib.get_masternodecount(function(masternodecount){
             lib.get_masternodeonlinecount(function(masternodeonlinecount){
-              db.get_cmc(settings.coinmarketcap.ticker, function(cmc){
-                db.get_stats(settings.coin, function (stats) {
-                  if (hashrate == 'There was an error. Check your console.') {
-                    hashrate = 0;
-                  }
-                  var masternodesoffline = Math.floor(masternodecount - masternodeonlinecount);
-                  res.send({ data: [{
-                    difficulty: difficulty,
-                    difficultyHybrid: difficultyHybrid,
-                    masternodeCount: masternodecount,
-                    masternodeOnlineCount: masternodeonlinecount,
-                    masternodeCountOnline: masternodeonlinecount,
-                    masternodeCountOffline: masternodesoffline,
-                    supply: formatNum(stats.supply, { maxFraction: 4 }),
-                    hashrate: hashrate,
-                    lastPrice: stats.last_price,
-                    connections: connections,
-                    blockcount: blockcount
-                  }]});
+              lib.get_guardiancount(function(guardiancount){
+                lib.get_guardianonlinecount(function(guardianonlinecount){
+                  db.get_cmc(settings.coinmarketcap.ticker, function(cmc){
+                    db.get_stats(settings.coin, function (stats) {
+                      if (hashrate == 'There was an error. Check your console.') {
+                        hashrate = 0;
+                      }
+                      var totalMasternodeCount = masternodecount.total;
+                      var totalGuardianCount = guardiancount.total;
+                      var masternodesoffline = Math.floor(totalMasternodeCount - masternodeonlinecount);
+                      var guardiansoffline = Math.floor(totalGuardianCount - guardianonlinecount);
+                      res.send({ data: [{
+                        difficulty: difficulty,
+                        difficultyHybrid: difficultyHybrid,
+                        masternodeCount: totalMasternodeCount,
+                        masternodeOnlineCount: masternodeonlinecount,
+                        masternodeCountOnline: masternodeonlinecount,
+                        masternodeCountOffline: masternodesoffline,
+                        guardianCount: totalGuardianCount,
+                        guardianOnlineCount: guardianonlinecount,
+                        guardianCountOnline: guardianonlinecount,
+                        guardianCountOffline: guardiansoffline,
+
+                        supply: formatNum(stats.supply, { maxFraction: 4 }),
+                        hashrate: hashrate,
+                        lastPrice: stats.last_price,
+                        connections: connections,
+                        blockcount: blockcount
+                      }]});
+                    });
+                  });
                 });
               });
             });

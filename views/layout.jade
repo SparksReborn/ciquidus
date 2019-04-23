@@ -40,6 +40,8 @@ html
             $("#supply").text(json.data[0].supply);
             $("#masternodeCountOnline").text(json.data[0].masternodeCountOnline);
             $("#masternodeCountOffline").text(json.data[0].masternodeCountOffline);
+            $("#guardianCountOnline").text(json.data[0].guardianCountOnline);
+            $("#guardianCountOffline").text(json.data[0].guardianCountOffline);
             $("#difficulty").text(json.data[0].difficulty);
             $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
             $("#hashrate").text(json.data[0].hashrate);
@@ -170,83 +172,94 @@ html
                   span.menu-text #{settings.locale.menu_api}
     .col-md-10.col-md-offset-1
         .panel.panel-default(style='background-color:#ff7518;padding:15px;font-weight:bold;')
-          | Please update your Sparks Wallet to the #[a(href="https://github.com/sparkspay/sparks/releases/tag/v0.12.4.2") latest version]. Instructions can be found on our #[a(href="https://discord.gg/bAE8AMn") Discord Server] :)!
-    .col-md-12
-      .row.text-center
-        .col-md-2.col-md-offset-1
-          .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading.panel-argo
-              if settings.nethash_units == 'K'
-                strong #{settings.locale.network} (KH/s)
-              else if settings.nethash_units == 'M'
-                strong #{settings.locale.network} (MH/s)
-              else if settings.nethash_units == 'G'
-                strong #{settings.locale.network} (GH/s)
-              else if settings.nethash_units == 'T'
-                strong #{settings.locale.network} (TH/s)
-              else if settings.nethash_units == 'P'
-                strong #{settings.locale.network} (PH/s)
-              else if settings.nethash_units == 'H'
-                strong #{settings.locale.network} (H/s)
-            .panel-body
-              #hashratepanel
-                span.glyphicon.fas.fa-cogs
-                if settings.index.difficulty == 'Hybrid'
-                  label#hashrate -
-                  <br>
-                  label#lblX1
-                else
-                  label#hashrate -
-        .col-md-2
-          .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading.panel-argo
-              strong #{settings.locale.difficulty}
-            .panel-body
-              #difficultypanel
-                span.glyphicon.fas.fa-sliders-h
-                if settings.index.difficulty == 'Hybrid'
-                  label#difficulty -
-                  <br>
-                  label#difficultyHybrid -
-                else
-                  label#difficulty -
-        .col-md-2
-         .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading.panel-argo
-              strong #{settings.locale.masternodecount}
-            .panel-body
-              #masternodepanel
-                span.glyphicon.fa.fa-exclamation-triangle
-                label#masternodeCountOffline -
-                label &nbsp;&#x2F;&nbsp;
-                label#masternodeCountOnline -
-                span.glyphicon.fa.fa-check-circle
-        .col-md-2
-          .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading.panel-argo
-              strong #{settings.locale.ex_supply} (#{settings.symbol})
-            .panel-body
-              #supplypanel
-                span.glyphicon.fas.fa-coins
-                if settings.index.difficulty == 'Hybrid'
-                  label#supply -
-                  <br>
-                  label#lblX1
-                else
-                  label#supply -
-        .col-md-2
-          .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading.panel-argo
-              strong #{settings.markets.exchange} Price
-            .panel-body
-              #pricepanel
-                span.glyphicon.fa.fa-rocket
-                if settings.index.difficulty == 'Hybrid'
-                  label#lastPrice -
-                  <br>
-                  label#lblX1
-                else
-                  label#lastPrice -
+          | Please update your Sparks Wallet to the #[a(href="https://github.com/sparkspay/sparks/releases/tag/v0.12.4.2") latest version]. Instructions can be found on our #[a(href="https://discord.gg/bAE8AMn") Discord Server].
+    .col-md-10.col-md-offset-1
+        .row.text-center
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                if settings.nethash_units == 'K'
+                  strong #{settings.locale.network} (KH/s)
+                else if settings.nethash_units == 'M'
+                  strong #{settings.locale.network} (MH/s)
+                else if settings.nethash_units == 'G'
+                  strong #{settings.locale.network} (GH/s)
+                else if settings.nethash_units == 'T'
+                  strong #{settings.locale.network} (TH/s)
+                else if settings.nethash_units == 'P'
+                  strong #{settings.locale.network} (PH/s)
+                else if settings.nethash_units == 'H'
+                  strong #{settings.locale.network} (H/s)
+              .panel-body
+                #hashratepanel
+                  span.glyphicon.fas.fa-cogs
+                  if settings.index.difficulty == 'Hybrid'
+                    label#hashrate -
+                    <br>
+                    label#lblX1
+                  else
+                    label#hashrate -
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                strong #{settings.locale.difficulty}
+              .panel-body
+                #difficultypanel
+                  span.glyphicon.fas.fa-sliders-h
+                  if settings.index.difficulty == 'Hybrid'
+                    label#difficulty -
+                    <br>
+                    label#difficultyHybrid -
+                  else
+                    label#difficulty -
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                strong #{settings.locale.masternodecount}
+              .panel-body
+                #masternodepanel
+                  span.glyphicon.fa.fa-exclamation-triangle
+                  label#masternodeCountOffline -
+                  label &nbsp;&#x2F;&nbsp;
+                  label#masternodeCountOnline -
+                  span.glyphicon.fa.fa-check-circle
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                strong #{settings.locale.guardiancount}
+              .panel-body
+                #masternodepanel
+                  span.glyphicon.fa.fa-exclamation-triangle
+                  label#guardianCountOffline -
+                  label &nbsp;&#x2F;&nbsp;
+                  label#guardianCountOnline -
+                  span.glyphicon.fa.fa-check-circle
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                strong #{settings.locale.ex_supply} (#{settings.symbol})
+              .panel-body
+                #supplypanel
+                  span.glyphicon.fas.fa-coins
+                  if settings.index.difficulty == 'Hybrid'
+                    label#supply -
+                    <br>
+                    label#lblX1
+                  else
+                    label#supply -
+          .col-md-2
+            .panel.panel-default.hidden-sm.hidden-xs
+              .panel-heading.panel-argo
+                strong #{settings.markets.exchange} Price
+              .panel-body
+                #pricepanel
+                  span.glyphicon.fa.fa-rocket
+                  if settings.index.difficulty == 'Hybrid'
+                    label#lastPrice -
+                    <br>
+                    label#lblX1
+                  else
+                    label#lastPrice -
     .col-xs-12.col-md-10.col-md-offset-1
       .row.text-center(style='margin: 20px 0;')
         form.form-inline(method='post', action='/search')
